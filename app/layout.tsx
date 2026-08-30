@@ -5,6 +5,7 @@ import { Nav } from "@/components/Nav";
 import { MobileMenu } from "@/components/MobileMenu";
 import { Footer } from "@/components/Footer";
 import { SectionDeck } from "@/components/SectionDeck";
+import { Behaviors } from "@/components/Behaviors";
 
 // Mismos pesos que carga hoy referencia/index.html desde Google Fonts:
 // Inter 400/500/600 · Saira Condensed 500/600/700/800.
@@ -85,6 +86,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <SectionDeck />
+        <Behaviors />
       </body>
     </html>
   );
