@@ -6,6 +6,7 @@ import { MobileMenu } from "@/components/MobileMenu";
 import { Footer } from "@/components/Footer";
 import { SectionDeck } from "@/components/SectionDeck";
 import { Behaviors } from "@/components/Behaviors";
+import { Analytics } from "@vercel/analytics/next";
 
 // Mismos pesos que carga hoy referencia/index.html desde Google Fonts:
 // Inter 400/500/600 · Saira Condensed 500/600/700/800.
@@ -98,6 +99,9 @@ export default function RootLayout({
         <Footer />
         <SectionDeck />
         <Behaviors />
+        {/* Vercel Web Analytics: no renderiza nada, sin cookies. Sólo reporta en
+            el deploy de Vercel con Web Analytics habilitado en el dashboard. */}
+        <Analytics />
       </body>
     </html>
   );
