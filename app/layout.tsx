@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Saira_Condensed } from "next/font/google";
 import "./globals.css";
+import { Nav } from "@/components/Nav";
+import { MobileMenu } from "@/components/MobileMenu";
+import { Footer } from "@/components/Footer";
+import { SectionDeck } from "@/components/SectionDeck";
 
 // Mismos pesos que carga hoy referencia/index.html desde Google Fonts:
 // Inter 400/500/600 · Saira Condensed 500/600/700/800.
@@ -73,7 +77,14 @@ export default function RootLayout({
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <a className="skip" href="#trabajo">
+          Saltar al contenido
+        </a>
+        <Nav />
+        <MobileMenu />
         {children}
+        <Footer />
+        <SectionDeck />
       </body>
     </html>
   );
