@@ -1,4 +1,7 @@
-// Portado 1:1 desde <section id="sobre-mi"> de referencia/index.html.
+// Portado desde <section id="sobre-mi"> de referencia/index.html.
+// DBO-1198 se aparta de la paridad 1:1 a propósito: la .timeline se divide en
+// dos grupos rotulados (Experiencia / Formación) para que la entrada académica
+// deje de leerse como un empleo más. El snapshot referencia/index.html no cambia.
 export function SobreMi() {
   return (
     <section className="sec" id="sobre-mi" aria-labelledby="about-h">
@@ -24,42 +27,52 @@ export function SobreMi() {
             </p>
             <p>Trabajo el stack completo, con foco en React, Next.js y TypeScript.</p>
           </div>
-          <ul className="timeline reveal-stagger">
-            <li>
-              <span className="yr">2025 - 2026</span>
-              <div>
-                <b>Forcast</b>
-                <span>
-                  Full Stack Developer. SaaS de gestión municipal (DOM Digital) y app de
-                  carga eléctrica (E-Hive).
-                </span>
-              </div>
-            </li>
-            <li>
-              <span className="yr">2025</span>
-              <div>
-                <b>Universidad Andrés Bello</b>
-                <span>Titulado en Ingeniería en Computación e Informática.</span>
-              </div>
-            </li>
-            <li>
-              <span className="yr">2024</span>
-              <div>
-                <b>Ewreka</b>
-                <span>Práctica profesional. Desarrollo móvil con Flutter.</span>
-              </div>
-            </li>
-            <li>
-              <span className="yr">2022 - 2023</span>
-              <div>
-                <b>Valuesite Ltda.</b>
-                <span>
-                  Full Stack Developer. Modernización de plataformas de salud para Codelco
-                  (iSalud).
-                </span>
-              </div>
-            </li>
-          </ul>
+          <div className="timeline">
+            <div className="tl-group reveal">
+              <h3 className="tl-group-h">Experiencia</h3>
+              <ul className="reveal-stagger">
+                <li>
+                  <span className="yr">2025 - 2026</span>
+                  <div>
+                    <b>Forcast</b>
+                    <span>
+                      Full Stack Developer. SaaS de gestión municipal (DOM Digital) y app
+                      de carga eléctrica (E-Hive).
+                    </span>
+                  </div>
+                </li>
+                <li>
+                  <span className="yr">2024</span>
+                  <div>
+                    <b>Ewreka</b>
+                    <span>Práctica profesional. Desarrollo móvil con Flutter.</span>
+                  </div>
+                </li>
+                <li>
+                  <span className="yr">2022 - 2023</span>
+                  <div>
+                    <b>Valuesite Ltda.</b>
+                    <span>
+                      Full Stack Developer. Modernización de plataformas de salud para
+                      Codelco (iSalud).
+                    </span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className="tl-group reveal">
+              <h3 className="tl-group-h">Formación</h3>
+              <ul className="reveal-stagger">
+                <li>
+                  <span className="yr">2025</span>
+                  <div>
+                    <b>Universidad Andrés Bello</b>
+                    <span>Titulado en Ingeniería en Computación e Informática.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
