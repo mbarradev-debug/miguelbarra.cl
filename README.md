@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# miguelbarra.cl
 
-## Getting Started
+Portfolio de Miguel Barra, migrado desde un sitio de un solo archivo
+(`referencia/index.html`) a Next.js (App Router, TypeScript). El objetivo de la
+migración es paridad visual y de comportamiento 1:1 con ese HTML.
 
-First, run the development server:
+## Desarrollo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # build de producción
+npm run lint     # eslint (eslint-config-next)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Para comparar contra el original mientras se trabaja:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd referencia && python3 -m http.server 8899
+# http://localhost:8899/index.html
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estructura
 
-## Learn More
+- `app/` — `layout.tsx` (shell, fuentes, Metadata API, script anti-flash de
+  tema), `page.tsx` (composición de secciones), `globals.css` (CSS global,
+  portado literal del `<style>` original).
+- `components/` — un componente por sección/pieza del shell; `Behaviors.tsx`
+  monta los hooks de interactividad en `components/behaviors/`.
+- `public/` — imágenes (servidas con `next/image`) y el CV en PDF.
+- `referencia/index.html` — el sitio original, fuente de verdad de la migración.
 
-To learn more about Next.js, take a look at the following resources:
+Más contexto y convenciones en [`AGENTS.md`](./AGENTS.md).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Proyecto Next.js estándar; se despliega en Vercel sin configuración adicional.
