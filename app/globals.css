@@ -619,6 +619,52 @@
     .js .reveal-stagger.in > *:nth-child(4) { transition-delay: 0.15s; }
     .js .reveal-stagger.in > *:nth-child(5) { transition-delay: 0.2s; }
     .js .reveal-stagger.in > *:nth-child(6) { transition-delay: 0.25s; }
+
+    /* Entrada del hero en la carga inicial (DBO-1202). Sin JS: @starting-style.
+       El titular (.display) NO se anima — es el elemento LCP. */
+    .nav {
+      transition: background 0.3s ease, border-color 0.3s ease,
+        backdrop-filter 0.3s ease, opacity 0.4s ease,
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-inner > :not(.display) {
+      transition: opacity 0.45s ease,
+        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-inner > .eyebrow { transition-delay: 0.08s; }
+    .hero-inner > .hero-sub { transition-delay: 0.22s; }
+    .hero-inner > .hero-cta { transition-delay: 0.3s; }
+    .hero-portrait img { transition: opacity 0.6s ease; }
+
+    @starting-style {
+      .nav { opacity: 0; transform: translateY(-8px); }
+      .hero-inner > :not(.display) { opacity: 0; transform: translateY(10px); }
+      .hero-portrait img { opacity: 0; }
+    }
+  }
+
+  /* Toggle de tema (DBO-1202): crossfade breve de los colores por token, sólo
+     durante el cambio. La clase `theme-anim` la pone/quita useThemeToggle.
+     Excepción consciente a "solo transform/opacity": el crossfade de tema no
+     se puede hacer de otra forma; se acota a 180 ms y una sola vez. */
+  html.theme-anim,
+  html.theme-anim *:not(.icon-sun):not(.icon-moon) {
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease,
+      fill 180ms ease !important;
+  }
+
+  /* Toggle de idioma (DBO-1202): crossfade con View Transitions. Navegadores
+     sin la API o con reduced-motion → navegación directa (LangToggle). */
+  ::view-transition-group(root) { animation-duration: 0.18s; }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
   }
 
   /* ============ RESPONSIVE ============ */

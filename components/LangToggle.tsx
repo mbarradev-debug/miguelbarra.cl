@@ -6,6 +6,13 @@ import { usePathname, useRouter } from "next/navigation";
 // Selector de idioma (DBO-1200). Cambia entre /es y /en preservando la ruta y
 // deja una cookie NEXT_LOCALE para que el redirect de la raíz sea persistente.
 // El tema y el scroll no se tocan (navegación cliente, misma página).
+// DBO-1202: la navegación se envuelve en View Transitions para un crossfade.
+
+type ViewTransition = { ready: Promise<unknown>; finished: Promise<unknown> };
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (cb: () => void) => ViewTransition;
+};
+
 export function LangToggle({ label }: { label: string }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -22,7 +29,18 @@ export function LangToggle({ label }: { label: string }) {
 
   function switchLang() {
     document.cookie = `NEXT_LOCALE=${other};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
-    router.replace(target);
+    const doc = document as ViewTransitionDocument;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (doc.startViewTransition && !reduce && doc.visibilityState === "visible") {
+      // router.replace corre dentro del callback: la navegación ocurre aunque
+      // la transición se aborte. Se silencia el rechazo del abort.
+      const noop = () => {};
+      const vt = doc.startViewTransition(() => router.replace(target));
+      vt.ready.catch(noop);
+      vt.finished.then(noop, noop);
+    } else {
+      router.replace(target);
+    }
   }
 
   return (
