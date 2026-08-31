@@ -1,10 +1,10 @@
 import Image from "next/image";
+import type { Dictionary } from "@/dictionaries";
 
-// Portado desde <header class="hero"> de referencia/index.html.
-// El retrato iba embebido como base64; ahora es /public/avatar-opt.jpg servido
-// con next/image (DBO-1187). Mismas dimensiones (600x600) y alt que el original;
-// el encuadre/máscara/transform los mantiene .hero-portrait img en globals.css.
-export function Hero() {
+// Portado desde <header class="hero"> de referencia/index.html. Texto vía
+// diccionario (DBO-1200). El h1 se ensambla desde piezas (pre/mid/post/accent)
+// porque lleva <br> y <span class="accent"> incrustados. CTA -> #work.
+export function Hero({ t }: { t: Dictionary["hero"] }) {
   return (
     <header className="hero" id="top">
       <div className="hero-portrait">
@@ -12,22 +12,24 @@ export function Hero() {
           src="/avatar-opt.jpg"
           width={600}
           height={600}
-          alt="Retrato en blanco y negro de Miguel Barra"
+          alt={t.portraitAlt}
           priority
         />
       </div>
       <div className="hero-inner">
-        <p className="eyebrow">Miguel Barra - Santiago, Chile</p>
+        <p className="eyebrow">{t.eyebrow}</p>
         <h1 className="display">
-          Construyo<br />productos que<br />llegan a{" "}
-          <span className="accent">producción.</span>
+          {t.h1.pre}
+          <br />
+          {t.h1.mid}
+          <br />
+          {t.h1.post}
+          <span className="accent">{t.h1.accent}</span>
         </h1>
-        <p className="hero-sub">
-          Full Stack Developer. React, Next.js y TypeScript, de la base de datos al deploy.
-        </p>
+        <p className="hero-sub">{t.sub}</p>
         <div className="hero-cta">
-          <a className="btn" href="#trabajo">
-            Ver trabajo
+          <a className="btn" href="#work">
+            {t.cta}
           </a>
         </div>
       </div>

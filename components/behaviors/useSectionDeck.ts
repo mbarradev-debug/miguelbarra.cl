@@ -4,7 +4,8 @@ import { useEffect } from "react";
 // (respeta reduced-motion), scroll-spy con IntersectionObserver que sincroniza
 // aria-current en dots y en los enlaces de la nav, disable en los extremos.
 // Portado 1:1 del bloque "desktop: section-by-section navigation control".
-const order = ["top", "trabajo", "stack", "sobre-mi", "contacto"];
+// Anclas en inglés estándar (DBO-1200), iguales en /es y /en.
+const order = ["top", "work", "stack", "about", "contact"];
 
 export function useSectionDeck() {
   useEffect(() => {

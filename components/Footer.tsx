@@ -1,12 +1,14 @@
-// Portado 1:1 desde <footer> de referencia/index.html.
-// El año lo actualiza el JS de DBO-1189; aquí queda el valor literal + id.
-export function Footer() {
+import type { Dictionary } from "@/dictionaries";
+
+// Portado desde <footer> de referencia/index.html. Texto vía diccionario
+// (DBO-1200). El año lo actualiza useFooterYear; aquí queda el valor literal + id.
+export function Footer({ t }: { t: Dictionary["footer"] }) {
   return (
     <footer>
       <span>
-        &copy; <span id="year">2026</span> Miguel Barra. Santiago, Chile.
+        &copy; <span id="year">2026</span> {t.copyright}
       </span>
-      <span>Construido con HTML, CSS y un poco de JavaScript.</span>
+      <span>{t.built}</span>
     </footer>
   );
 }

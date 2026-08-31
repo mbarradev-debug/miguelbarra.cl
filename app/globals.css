@@ -246,6 +246,28 @@
   :root[data-theme="light"] .toggle .icon-sun { display: none; }
   :root[data-theme="light"] .toggle .icon-moon { display: block; }
 
+  /* Selector de idioma (DBO-1200). Píldora al estilo de .toggle. */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1.5px solid color-mix(in srgb, var(--nav-fg) 34%, transparent);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--nav-fg-dim);
+    font: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .lang-toggle:hover { border-color: var(--nav-fg); }
+  .lang-toggle [aria-current="true"] { color: var(--nav-fg); }
+  .lang-toggle .lang-sep { color: color-mix(in srgb, var(--nav-fg) 34%, transparent); }
+
   .menu-btn { display: none; }
   .mobile-menu { display: none; }
 
@@ -682,7 +704,7 @@
       padding-bottom: 48px;
     }
     /* la sección Trabajo es más alta que el viewport: fluye desde arriba */
-    #trabajo.sec {
+    #work.sec {
       justify-content: flex-start;
       scroll-snap-align: none;
       padding-top: clamp(96px, 13vh, 128px);

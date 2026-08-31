@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "title": "Miguel Barra — Full Stack Developer",
+    "description": "Miguel Barra, Full Stack Developer en Santiago de Chile. React, Next.js y TypeScript, de la base de datos al deploy. Proyectos en producción para los sectores público y privado.",
+    "ogTitle": "Miguel Barra — Full Stack Developer",
+    "ogDescription": "React, Next.js y TypeScript, de la base de datos al deploy. Proyectos en producción para los sectores público y privado.",
+    "ogLocale": "es_CL"
+  },
+  "skip": "Saltar al contenido",
+  "nav": {
+    "primary": "Principal",
+    "home": "Miguel Barra, inicio",
+    "work": "Trabajo",
+    "about": "Sobre mí",
+    "contact": "Contacto",
+    "connect": "Conectar",
+    "toggleTheme": "Cambiar tema",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "switchLang": "Ver el sitio en inglés"
+  },
+  "hero": {
+    "eyebrow": "Miguel Barra - Santiago, Chile",
+    "h1": { "pre": "Construyo", "mid": "productos que", "post": "llegan a ", "accent": "producción." },
+    "sub": "Full Stack Developer. React, Next.js y TypeScript, de la base de datos al deploy.",
+    "cta": "Ver trabajo",
+    "portraitAlt": "Retrato en blanco y negro de Miguel Barra"
+  },
+  "stats": {
+    "label": "En resumen",
+    "items": [
+      { "value": "2+ años", "label": "entregando en producción" },
+      { "value": "Público y privado", "label": "municipal, salud, banca" },
+      { "value": "Titulado 2025", "label": "Ing. Computación, UNAB" }
+    ]
+  },
+  "work": {
+    "heading": "Trabajo",
+    "intro": "Proyectos en producción para los sectores público y privado: el contexto, mi rol y cómo se resolvió.",
+    "labels": {
+      "context": "Contexto",
+      "role": "Rol",
+      "solution": "Solución",
+      "stack": "Stack",
+      "outcome": "Resultado"
+    },
+    "linkSite": "Ver sitio",
+    "linkCode": "Código en GitHub",
+    "featured": {
+      "name": "Pulso",
+      "kicker": "Proyecto propio · En producción",
+      "lead": "Dashboard de indicadores económicos de Chile en tiempo casi real.",
+      "shotAlt": "Captura de Pulso: gráfico histórico de un indicador y grilla de indicadores económicos",
+      "facts": [
+        { "k": "context", "v": "La API SI3 del Banco Central de Chile es difícil de consumir directo desde el frontend y tiene particularidades no triviales.", "em": false, "pending": "" },
+        { "k": "role", "v": "Diseño y desarrollo completo, frontend y backend.", "em": true, "pending": "" },
+        { "k": "solution", "v": "Una API intermedia propia con Route Handlers de Next.js que encapsula la fuente, con cache en memoria y fallback ante fallos externos. Diez indicadores (UF, dólar, IPC, IMACEC, TPM y otros) con grilla, gráfico histórico, favoritos y conversor.", "em": false, "pending": "" },
+        { "k": "outcome", "v": "En producción en Vercel, con tests unitarios en Vitest, end to end en Playwright e integración continua en GitHub Actions.", "em": true, "pending": "" }
+      ]
+    },
+    "items": [
+      {
+        "name": "DOM Digital",
+        "kicker": "Forcast · Full Stack Developer",
+        "lead": "SaaS para digitalizar trámites de construcción municipal.",
+        "shotAlt": "",
+        "facts": [
+          { "k": "context", "v": "Los trámites de la Dirección de Obras Municipales corrían sobre un sistema legacy.", "em": false, "pending": "" },
+          { "k": "role", "v": "Construcción desde cero, coordinando requerimientos directo con el cliente.", "em": true, "pending": "" },
+          { "k": "stack", "v": "Next.js, Node.js, PostgreSQL, Firebase Auth, Azure.", "em": false, "pending": "" },
+          { "k": "outcome", "v": "Reemplazó al sistema legacy; desplegado en Azure. ", "em": false, "pending": "Métricas de adopción por confirmar" }
+        ]
+      },
+      {
+        "name": "E-Hive",
+        "kicker": "Forcast · Módulo en solitario",
+        "lead": "Gestión de carga eléctrica con verificación de patente.",
+        "shotAlt": "",
+        "facts": [
+          { "k": "context", "v": "La plataforma necesita verificar la patente antes de habilitar la carga.", "em": false, "pending": "" },
+          { "k": "role", "v": "Desarrollo en solitario del módulo de escaneo QR y sus endpoints.", "em": true, "pending": "" },
+          { "k": "stack", "v": "Angular, Python, Flask, Docker (microservicios).", "em": false, "pending": "" },
+          { "k": "outcome", "v": "", "em": false, "pending": "Estado en producción por confirmar" }
+        ]
+      },
+      {
+        "name": "Sucursal Virtual de iSalud",
+        "kicker": "Valuesite · Full Stack Developer",
+        "lead": "Plataforma de bonos, reembolsos y certificados de una Isapre de Codelco.",
+        "shotAlt": "",
+        "facts": [
+          { "k": "context", "v": "La Sucursal Virtual de iSalud operaba sobre un frontend legacy.", "em": false, "pending": "" },
+          { "k": "role", "v": "Modernización individual, con supervisión de un desarrollador senior.", "em": true, "pending": "" },
+          { "k": "solution", "v": "Migración de funcionalidades críticas del frontend y nuevos métodos en microservicios ASP.NET MVC sobre Oracle (PL/SQL): listado de médicos, consulta de pacientes y otros flujos clínicos.", "em": false, "pending": "" },
+          { "k": "outcome", "v": "Plataforma usada por más de 18.000 beneficiarios de Codelco.", "em": true, "pending": "" }
+        ]
+      },
+      {
+        "name": "App Ewreka",
+        "kicker": "Ewreka · Práctica profesional",
+        "lead": "App móvil de una plataforma de beneficios y descuentos.",
+        "shotAlt": "",
+        "facts": [
+          { "k": "context", "v": "Aplicación móvil en desarrollo activo de un producto temprano.", "em": false, "pending": "" },
+          { "k": "role", "v": "Implementación de funcionalidades y levantamiento de requerimientos directo con la fundadora.", "em": true, "pending": "" },
+          { "k": "stack", "v": "Flutter.", "em": false, "pending": "" },
+          { "k": "outcome", "v": "", "em": false, "pending": "Alcance y estado por confirmar" }
+        ]
+      }
+    ]
+  },
+  "tech": {
+    "heading": "Stack",
+    "intro": "Lo que uso a diario para llevar un producto de la idea al deploy.",
+    "columns": [
+      { "title": "Frontend", "items": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Angular", "Shadcn/ui"] },
+      { "title": "Backend", "items": ["Node.js", "NestJS", "ASP.NET MVC (.NET)", "Python / Flask", "REST APIs", "Prisma ORM"] },
+      { "title": "Datos e infraestructura", "items": ["PostgreSQL", "Oracle PL/SQL", "Supabase", "Docker", "Azure, GCP, Vercel", "CI/CD, GitHub Actions", "Firebase Auth"] },
+      { "title": "Mobile", "items": ["Flutter", "Ionic (Angular)"] }
+    ],
+    "note": { "prefix": "Además:", "rest": " trabajo a diario con Claude Code CLI y Antigravity." }
+  },
+  "about": {
+    "heading": "Sobre mí",
+    "intro": "Formación, recorrido y la forma en que me gusta trabajar.",
+    "prose": [
+      { "strong": "Soy ingeniero en Computación e Informática", "rest": ", titulado en la Universidad Andrés Bello en 2025." },
+      { "strong": "", "rest": "En poco más de dos años he entregado productos en producción para los sectores público y privado: un SaaS de gestión municipal, la modernización de la Sucursal Virtual de una Isapre de Codelco y herramientas propias para el mercado chileno." },
+      { "strong": "", "rest": "Trabajo el stack completo, con foco en React, Next.js y TypeScript." }
+    ],
+    "groups": {
+      "experience": {
+        "label": "Experiencia",
+        "items": [
+          { "years": "2025 - 2026", "org": "Forcast", "desc": "Full Stack Developer. SaaS de gestión municipal (DOM Digital) y app de carga eléctrica (E-Hive)." },
+          { "years": "2024", "org": "Ewreka", "desc": "Práctica profesional. Desarrollo móvil con Flutter." },
+          { "years": "2022 - 2023", "org": "Valuesite Ltda.", "desc": "Full Stack Developer. Modernización de plataformas de salud para Codelco (iSalud)." }
+        ]
+      },
+      "education": {
+        "label": "Formación",
+        "items": [
+          { "years": "2025", "org": "Universidad Andrés Bello", "desc": "Titulado en Ingeniería en Computación e Informática." }
+        ]
+      }
+    }
+  },
+  "contact": {
+    "heading": "Conversemos.",
+    "intro": "Estoy abierto a conectar y a conversar sobre proyectos, equipos y oportunidades.",
+    "links": { "cv": "Descargar CV (PDF)" }
+  },
+  "footer": {
+    "copyright": "Miguel Barra. Santiago, Chile.",
+    "built": "Construido con HTML, CSS y un poco de JavaScript."
+  },
+  "deck": {
+    "label": "Navegación por secciones",
+    "goTo": {
+      "top": "Ir a Inicio",
+      "work": "Ir a Trabajo",
+      "stack": "Ir a Stack",
+      "about": "Ir a Sobre mí",
+      "contact": "Ir a Contacto"
+    },
+    "prev": "Sección anterior",
+    "next": "Sección siguiente"
+  }
+}

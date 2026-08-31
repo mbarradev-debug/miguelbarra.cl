@@ -27,24 +27,40 @@ hace falta una decisión de diseño nueva, va en otra issue, no aquí.
 ## Estructura
 
 ```
-app/
-  layout.tsx     Root layout: <html lang="es">, fuentes (next/font),
-                 metadata + viewport (Metadata API), script anti-flash de
-                 tema, y el shell común (skip link, Nav, MobileMenu, Footer,
-                 SectionDeck, Behaviors).
-  page.tsx       Compone las secciones: Hero, Stats, y dentro de <main>
-                 Trabajo, Stack, SobreMi, Contacto.
-  globals.css    CSS global. Es el <style> de referencia/index.html portado
+proxy.ts         Routing por locale (DBO-1200). En Next 16 esta convención se
+                 llama `proxy`, no `middleware`. La raíz / redirige 307 a /es o
+                 /en (cookie NEXT_LOCALE, si no Accept-Language). Prefija toda
+                 ruta sin locale.
+dictionaries/
+  es.json        Todo el texto del sitio en español. Fuente de verdad de la forma.
+  en.json        Traducción al inglés; mismo esquema (Record<Locale,Dictionary>
+                 lo verifica en build).
+  index.ts       getDictionary(locale), tipo Locale/Dictionary, isLocale().
+app/layout.tsx   Root layout ESTÁTICO: <html>, <body>, fuentes (next/font) y el
+                 <script> de arranque (`.js`, `lang` desde la URL, anti-flash de
+                 tema). No se re-renderiza al cambiar de locale, así que el
+                 <script> no dispara warnings en cliente y corre antes del paint.
+app/[lang]/
+  layout.tsx     Layout por locale (fragmento, sin <html>): generateMetadata +
+                 generateStaticParams por idioma, y el shell común (skip link,
+                 Nav, MobileMenu, Footer, SectionDeck, Behaviors, Analytics).
+  page.tsx       Lee params.lang -> diccionario -> baja cada slice a las
+                 secciones: Hero, Stats, y dentro de <main> Trabajo, Stack,
+                 SobreMi, Contacto.
+app/globals.css  CSS global. Es el <style> de referencia/index.html portado
                  literal: tokens de tema, dark/light vía [data-theme],
                  @media (prefers-reduced-motion / -transparency / -contrast),
-                 scroll-snap, etc. Único cambio respecto al original: los
-                 nombres de familia "Inter" / "Saira Condensed" pasan a
-                 var(--font-inter) / var(--font-saira).
+                 scroll-snap, etc. Cambios respecto al original: familias
+                 "Inter"/"Saira Condensed" -> var(--font-inter)/var(--font-saira);
+                 selector #trabajo.sec -> #work.sec.
 
 components/
   Nav, MobileMenu, Hero, Stats, Trabajo, Stack, SobreMi, Contacto, Footer,
   SectionDeck   Un componente por sección/pieza del shell. Server components;
-                sólo markup portado 1:1 del original.
+                reciben su slice del diccionario como prop `t` (sin prop-drilling
+                más allá de layout/page).
+  LangToggle.tsx Client component: selector ES/EN en la nav. Cambia entre /es y
+                /en preservando la ruta + cookie NEXT_LOCALE.
   Behaviors.tsx Client component que no renderiza nada; monta los hooks de
                 interactividad. Se coloca una vez en layout.tsx.
   behaviors/    Un hook por bloque del <script> vanilla del original:
@@ -78,25 +94,36 @@ cd referencia && python3 -m http.server 8899
 # http://localhost:8899/index.html
 ```
 
-## Convenciones (acordadas en DBO-1186 … DBO-1191)
+## Convenciones (acordadas en DBO-1186 … DBO-1191, i18n en DBO-1200)
 
+- **i18n:** todo el texto visible + `aria-label` + `alt` + metadatos viven en
+  `dictionaries/{es,en}.json`, nunca inline en el JSX. Nombres propios (proyectos,
+  empresas, tecnologías), email y URLs sí van inline. Las anclas de sección usan
+  nomenclatura estándar en inglés (`#top` `#work` `#stack` `#about` `#contact`),
+  iguales en ambos idiomas. `referencia/index.html` (español, `#trabajo` etc.) no
+  se toca.
 - **Sin Tailwind.** Se quitó en el setup; el porte de estilos es CSS global
   literal. No reintroducir Tailwind.
 - **Fuentes:** `next/font/google`, auto-hospedadas. Inter 400/500/600, Saira
   Condensed 500/600/700/800, expuestas como `--font-inter` / `--font-saira`.
 - **Assets:** todo en `/public`. `next/image` para imágenes (mismas
   dimensiones y `alt` que el original); enlace estático para el PDF.
-- **Metadata:** los exports `metadata` y `viewport` de `app/layout.tsx`
-  reproducen el `<head>` de `referencia/index.html` (title, description, OG,
-  twitter, `theme-color` dark/light, favicon SVG inline "MB").
+- **Metadata:** `generateMetadata` + `viewport` de `app/[lang]/layout.tsx`
+  (funcionan aunque el layout ya no renderice `<html>`) reproducen el `<head>`
+  de `referencia/index.html` por locale (title,
+  description, OG con `og:locale` es_CL/en_US, twitter, `theme-color`
+  dark/light, favicon SVG inline "MB", `alternates.languages` para hreflang).
 - **Tema:** oscuro por defecto, atributo `data-theme`, tokens light/dark en
-  `globals.css`. El IIFE anti-flash del `<head>` original va inline en
-  `layout.tsx` y corre antes del paint — recargar en claro no muestra un
-  flash del tema oscuro. `<html>` lleva `suppressHydrationWarning` porque ese
-  script muta el elemento antes de la hidratación.
+  `globals.css`. El IIFE anti-flash del `<head>` original va inline en el
+  `<script>` de arranque de `app/layout.tsx` (root estático — un `<script>` en
+  `app/[lang]/layout.tsx` dispararía un warning al re-renderizar en cliente al
+  cambiar de idioma). Corre antes del paint. `<html>` lleva
+  `suppressHydrationWarning` porque ese script muta el elemento (`data-theme`,
+  `class`, `lang`) antes de la hidratación.
 - **Interactividad:** el JS vanilla del original vive en `components/behaviors/`
   como hooks con `useEffect`, montados desde el client component `Behaviors`.
   El markup de las secciones se queda como server components; no meter estado
-  ni `"use client"` en ellos sin motivo.
+  ni `"use client"` en ellos sin motivo. El array `order` de `useSectionDeck`
+  usa las anclas en inglés.
 - **No tocar el bloque `nextjs-agent-rules`** de este archivo: lo regenera
   `next dev`. Si aparece como cambio sin commitear, commitéalo tal cual.
