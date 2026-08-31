@@ -36,11 +36,14 @@ dictionaries/
   en.json        Traducción al inglés; mismo esquema (Record<Locale,Dictionary>
                  lo verifica en build).
   index.ts       getDictionary(locale), tipo Locale/Dictionary, isLocale().
+app/layout.tsx   Root layout ESTÁTICO: <html>, <body>, fuentes (next/font) y el
+                 <script> de arranque (`.js`, `lang` desde la URL, anti-flash de
+                 tema). No se re-renderiza al cambiar de locale, así que el
+                 <script> no dispara warnings en cliente y corre antes del paint.
 app/[lang]/
-  layout.tsx     Root layout: <html lang={locale}>, fuentes (next/font),
-                 generateMetadata + generateStaticParams por locale, script
-                 anti-flash de tema, y el shell común (skip link, Nav,
-                 MobileMenu, Footer, SectionDeck, Behaviors, Analytics).
+  layout.tsx     Layout por locale (fragmento, sin <html>): generateMetadata +
+                 generateStaticParams por idioma, y el shell común (skip link,
+                 Nav, MobileMenu, Footer, SectionDeck, Behaviors, Analytics).
   page.tsx       Lee params.lang -> diccionario -> baja cada slice a las
                  secciones: Hero, Stats, y dentro de <main> Trabajo, Stack,
                  SobreMi, Contacto.
@@ -106,14 +109,17 @@ cd referencia && python3 -m http.server 8899
 - **Assets:** todo en `/public`. `next/image` para imágenes (mismas
   dimensiones y `alt` que el original); enlace estático para el PDF.
 - **Metadata:** `generateMetadata` + `viewport` de `app/[lang]/layout.tsx`
-  reproducen el `<head>` de `referencia/index.html` por locale (title,
+  (funcionan aunque el layout ya no renderice `<html>`) reproducen el `<head>`
+  de `referencia/index.html` por locale (title,
   description, OG con `og:locale` es_CL/en_US, twitter, `theme-color`
   dark/light, favicon SVG inline "MB", `alternates.languages` para hreflang).
 - **Tema:** oscuro por defecto, atributo `data-theme`, tokens light/dark en
-  `globals.css`. El IIFE anti-flash del `<head>` original va inline en
-  `app/[lang]/layout.tsx` y corre antes del paint — recargar en claro no
-  muestra un flash del tema oscuro. `<html>` lleva `suppressHydrationWarning`
-  porque ese script muta el elemento antes de la hidratación.
+  `globals.css`. El IIFE anti-flash del `<head>` original va inline en el
+  `<script>` de arranque de `app/layout.tsx` (root estático — un `<script>` en
+  `app/[lang]/layout.tsx` dispararía un warning al re-renderizar en cliente al
+  cambiar de idioma). Corre antes del paint. `<html>` lleva
+  `suppressHydrationWarning` porque ese script muta el elemento (`data-theme`,
+  `class`, `lang`) antes de la hidratación.
 - **Interactividad:** el JS vanilla del original vive en `components/behaviors/`
   como hooks con `useEffect`, montados desde el client component `Behaviors`.
   El markup de las secciones se queda como server components; no meter estado

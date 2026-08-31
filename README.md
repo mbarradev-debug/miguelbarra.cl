@@ -23,8 +23,9 @@ cd referencia && python3 -m http.server 8899
 
 ## Estructura
 
-- `app/[lang]/` — `layout.tsx` (shell, fuentes, Metadata API por locale, script
-  anti-flash de tema), `page.tsx` (composición de secciones). `app/globals.css`
+- `app/layout.tsx` — root estático: `<html>`, fuentes, script de arranque
+  (`lang` + anti-flash de tema). `app/[lang]/layout.tsx` — shell + Metadata API
+  por locale; `app/[lang]/page.tsx` — composición de secciones. `app/globals.css`
   es el `<style>` original portado literal.
 - `dictionaries/` — todo el texto del sitio (`es.json` / `en.json`) + `getDictionary`.
 - `proxy.ts` — routing por locale (redirect de `/` según `Accept-Language`).

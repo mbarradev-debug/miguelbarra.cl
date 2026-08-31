@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 // Selector de idioma (DBO-1200). Cambia entre /es y /en preservando la ruta y
@@ -12,6 +13,12 @@ export function LangToggle({ label }: { label: string }) {
   const current = pathname.startsWith("/en") ? "en" : "es";
   const other = current === "en" ? "es" : "en";
   const target = `/${other}${pathname.slice(3)}`;
+
+  // El <html lang> lo fija el script de arranque desde la URL en carga dura;
+  // en navegación cliente lo re-sincronizamos aquí (sin <script> en el árbol).
+  useEffect(() => {
+    document.documentElement.lang = current;
+  }, [current]);
 
   function switchLang() {
     document.cookie = `NEXT_LOCALE=${other};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;

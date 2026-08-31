@@ -1,6 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Saira_Condensed } from "next/font/google";
-import "../globals.css";
 import { locales, getDictionary, isLocale, defaultLocale } from "@/dictionaries";
 import { Nav } from "@/components/Nav";
 import { MobileMenu } from "@/components/MobileMenu";
@@ -13,23 +11,6 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ lang: string }>;
 };
-
-// Mismos pesos que carga hoy referencia/index.html desde Google Fonts:
-// Inter 400/500/600 · Saira Condensed 500/600/700/800.
-// next/font los auto-hospeda; el render es equivalente y sin layout shift.
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-  variable: "--font-inter",
-});
-
-const sairaCondensed = Saira_Condensed({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  display: "swap",
-  variable: "--font-saira",
-});
 
 // Favicon: el SVG inline "MB" del original, como data URI.
 const faviconDataUri =
@@ -75,43 +56,28 @@ export const viewport: Viewport = {
   ],
 };
 
-// Anti-flash de tema: IIFE portado tal cual desde el <head> de referencia/index.html.
-// Corre antes del paint para que un recargo en modo claro no muestre el tema oscuro.
-const themeScript = `(function () {
-  var d = document.documentElement;
-  d.classList.add("js");
-  try {
-    var t = localStorage.getItem("theme");
-    if (t === "light" || t === "dark") d.setAttribute("data-theme", t);
-  } catch (e) {}
-})();`;
-
-export default async function RootLayout({ children, params }: Props) {
+// Layout por locale: sólo el shell y el contenido. El <html>/<body> y el script
+// de arranque están en app/layout.tsx (root estático) para que cambiar de idioma
+// no re-renderice el <script>.
+export default async function LangLayout({ children, params }: Props) {
   const { lang } = await params;
   const locale = isLocale(lang) ? lang : defaultLocale;
   const dict = getDictionary(locale);
 
   return (
-    <html
-      lang={locale}
-      className={`${inter.variable} ${sairaCondensed.variable}`}
-      suppressHydrationWarning
-    >
-      <body>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <a className="skip" href="#work">
-          {dict.skip}
-        </a>
-        <Nav t={dict.nav} />
-        <MobileMenu t={dict.nav} />
-        {children}
-        <Footer t={dict.footer} />
-        <SectionDeck t={dict.deck} />
-        <Behaviors />
-        {/* Vercel Web Analytics: no renderiza nada, sin cookies. Sólo reporta en
-            el deploy de Vercel con Web Analytics habilitado en el dashboard. */}
-        <Analytics />
-      </body>
-    </html>
+    <>
+      <a className="skip" href="#work">
+        {dict.skip}
+      </a>
+      <Nav t={dict.nav} />
+      <MobileMenu t={dict.nav} />
+      {children}
+      <Footer t={dict.footer} />
+      <SectionDeck t={dict.deck} />
+      <Behaviors />
+      {/* Vercel Web Analytics: no renderiza nada, sin cookies. Sólo reporta en
+          el deploy de Vercel con Web Analytics habilitado en el dashboard. */}
+      <Analytics />
+    </>
   );
 }
