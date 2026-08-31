@@ -50,9 +50,11 @@ app/[lang]/
 app/globals.css  CSS global. Es el <style> de referencia/index.html portado
                  literal: tokens de tema, dark/light vía [data-theme],
                  @media (prefers-reduced-motion / -transparency / -contrast),
-                 scroll-snap, etc. Cambios respecto al original: familias
-                 "Inter"/"Saira Condensed" -> var(--font-inter)/var(--font-saira);
-                 selector #trabajo.sec -> #work.sec.
+                 scroll-snap, reveals, etc. Cambios respecto al original:
+                 familias "Inter"/"Saira Condensed" ->
+                 var(--font-inter)/var(--font-saira); selector #trabajo.sec ->
+                 #work.sec; añadidos de motion de DBO-1202 (@starting-style del
+                 hero, .theme-anim, ::view-transition-*).
 
 components/
   Nav, MobileMenu, Hero, Stats, Trabajo, Stack, SobreMi, Contacto, Footer,
@@ -60,12 +62,16 @@ components/
                 reciben su slice del diccionario como prop `t` (sin prop-drilling
                 más allá de layout/page).
   LangToggle.tsx Client component: selector ES/EN en la nav. Cambia entre /es y
-                /en preservando la ruta + cookie NEXT_LOCALE.
+                /en preservando la ruta + cookie NEXT_LOCALE. La navegación se
+                envuelve en document.startViewTransition (crossfade) con guardas
+                de API / reduced-motion / visibilityState.
   Behaviors.tsx Client component que no renderiza nada; monta los hooks de
                 interactividad. Se coloca una vez en layout.tsx.
   behaviors/    Un hook por bloque del <script> vanilla del original:
                 useThemeToggle, useMobileMenu, useNavSolidify, useSectionDeck,
                 useScrollReveals, useFooterYear. Todos con guards de entorno.
+                useThemeToggle además pone la clase `theme-anim` en <html> ~200 ms
+                para el crossfade de color (DBO-1202).
 
 public/
   avatar-opt.jpg, avatar.jpeg, pulso-shot.jpg, MiguelBarra_CV.pdf
@@ -125,5 +131,19 @@ cd referencia && python3 -m http.server 8899
   El markup de las secciones se queda como server components; no meter estado
   ni `"use client"` en ellos sin motivo. El array `order` de `useSectionDeck`
   usa las anclas en inglés.
+- **Motion / microinteracciones** (auditoría en DBO-1201, implementación
+  DBO-1202): poco movimiento y sutil. Reusar la curva `cubic-bezier(0.16, 1,
+  0.3, 1)` y las duraciones ya presentes (no introducir tokens `--ease-*`);
+  todo bajo `@media (prefers-reduced-motion: no-preference)` o con guarda de
+  `matchMedia("(prefers-reduced-motion: reduce)")`.
+  - Toggle de tema: crossfade de color vía clase temporal `theme-anim` en
+    `<html>` (~180 ms), NO View Transitions (el wipe con `startViewTransition`
+    se descartó por `InvalidStateError` con la pestaña oculta).
+  - Toggle de idioma: `document.startViewTransition` alrededor de
+    `router.replace`, con fallback a navegación directa.
+  - Entrada del hero en carga: `@starting-style` (sin JS). El `h1.display` NO
+    se anima — es el elemento LCP.
+  - No animar lo que ya tiene transición (hover, nav solidify, `.reveal`,
+    menú móvil, deck).
 - **No tocar el bloque `nextjs-agent-rules`** de este archivo: lo regenera
   `next dev`. Si aparece como cambio sin commitear, commitéalo tal cual.
