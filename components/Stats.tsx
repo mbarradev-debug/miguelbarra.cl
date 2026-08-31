@@ -1,20 +1,17 @@
-// Portado 1:1 desde <section class="stats"> de referencia/index.html.
-export function Stats() {
+import type { Dictionary } from "@/dictionaries";
+
+// Portado desde <section class="stats"> de referencia/index.html. Texto vía
+// diccionario (DBO-1200).
+export function Stats({ t }: { t: Dictionary["stats"] }) {
   return (
-    <section className="stats" aria-label="En resumen">
+    <section className="stats" aria-label={t.label}>
       <div className="wrap">
-        <div>
-          <b>2+ años</b>
-          <span>entregando en producción</span>
-        </div>
-        <div>
-          <b>Público y privado</b>
-          <span>municipal, salud, banca</span>
-        </div>
-        <div>
-          <b>Titulado 2025</b>
-          <span>Ing. Computación, UNAB</span>
-        </div>
+        {t.items.map((s) => (
+          <div key={s.value}>
+            <b>{s.value}</b>
+            <span>{s.label}</span>
+          </div>
+        ))}
       </div>
     </section>
   );

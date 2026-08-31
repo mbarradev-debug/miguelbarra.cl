@@ -1,13 +1,16 @@
-// Portado 1:1 desde <div class="mobile-menu"> de referencia/index.html.
-export function MobileMenu() {
+import type { Dictionary } from "@/dictionaries";
+
+// Portado desde <div class="mobile-menu"> de referencia/index.html. Texto vía
+// diccionario (DBO-1200); anclas en inglés estándar.
+export function MobileMenu({ t }: { t: Dictionary["nav"] }) {
   return (
     <div className="mobile-menu" id="mobile-menu">
-      <button className="close" id="menu-close" type="button" aria-label="Cerrar menú">
+      <button className="close" id="menu-close" type="button" aria-label={t.closeMenu}>
         &times;
       </button>
-      <a href="#trabajo">Trabajo</a>
-      <a href="#sobre-mi">Sobre mí</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#work">{t.work}</a>
+      <a href="#about">{t.about}</a>
+      <a href="#contact">{t.contact}</a>
     </div>
   );
 }

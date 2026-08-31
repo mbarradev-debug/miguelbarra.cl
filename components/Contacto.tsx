@@ -1,16 +1,17 @@
-// Portado desde <section id="contacto"> de referencia/index.html.
-// El CV se sirve como archivo estático desde /public (DBO-1187).
-export function Contacto() {
+import type { Dictionary } from "@/dictionaries";
+
+// Portado desde <section id="contacto"> de referencia/index.html. Texto vía
+// diccionario (DBO-1200); ancla en inglés estándar (id="contact"). El CV se
+// sirve como archivo estático desde /public (DBO-1187).
+export function Contacto({ t }: { t: Dictionary["contact"] }) {
   return (
-    <section className="sec contact" id="contacto" aria-labelledby="contact-h">
+    <section className="sec contact" id="contact" aria-labelledby="contact-h">
       <div className="wrap reveal">
         <span className="sec-tick" aria-hidden="true"></span>
         <h2 id="contact-h" className="display">
-          Conversemos.
+          {t.heading}
         </h2>
-        <p>
-          Estoy abierto a conectar y a conversar sobre proyectos, equipos y oportunidades.
-        </p>
+        <p>{t.intro}</p>
         <a className="mail" href="mailto:mbarra.git@gmail.com">
           mbarra.git@gmail.com
         </a>
@@ -25,7 +26,7 @@ export function Contacto() {
             miguelbarra.cl
           </a>
           <a href="/MiguelBarra_CV.pdf" target="_blank" rel="noopener">
-            Descargar CV (PDF)
+            {t.links.cv}
           </a>
         </div>
       </div>

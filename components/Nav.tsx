@@ -1,22 +1,25 @@
-// Portado 1:1 desde <nav class="nav"> de referencia/index.html.
-// La interactividad (toggle de tema, abrir menú) se cablea en DBO-1189.
-export function Nav() {
+import type { Dictionary } from "@/dictionaries";
+import { LangToggle } from "@/components/LangToggle";
+
+// Portado desde <nav class="nav"> de referencia/index.html. Texto vía diccionario
+// (DBO-1200); anclas en inglés estándar (#work / #about / #contact).
+export function Nav({ t }: { t: Dictionary["nav"] }) {
   return (
-    <nav className="nav" aria-label="Principal">
-      <a href="#top" className="mono" aria-label="Miguel Barra, inicio">
+    <nav className="nav" aria-label={t.primary}>
+      <a href="#top" className="mono" aria-label={t.home}>
         MB
       </a>
       <div className="nav-links">
-        <a href="#trabajo">Trabajo</a>
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#work">{t.work}</a>
+        <a href="#about">{t.about}</a>
+        <a href="#contact">{t.contact}</a>
       </div>
       <div className="nav-right">
         <button
           className="toggle"
           id="theme-toggle"
           type="button"
-          aria-label="Cambiar tema"
+          aria-label={t.toggleTheme}
           aria-pressed="false"
         >
           <svg
@@ -44,14 +47,15 @@ export function Nav() {
             <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
           </svg>
         </button>
-        <a className="btn" href="#contacto">
-          Conectar
+        <LangToggle label={t.switchLang} />
+        <a className="btn" href="#contact">
+          {t.connect}
         </a>
         <button
           className="menu-btn"
           id="menu-open"
           type="button"
-          aria-label="Abrir menú"
+          aria-label={t.openMenu}
           aria-expanded="false"
         >
           <svg

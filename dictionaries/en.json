@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "title": "Miguel Barra — Full Stack Developer",
+    "description": "Miguel Barra, Full Stack Developer in Santiago, Chile. React, Next.js and TypeScript, from database to deploy. Production projects for the public and private sectors.",
+    "ogTitle": "Miguel Barra — Full Stack Developer",
+    "ogDescription": "React, Next.js and TypeScript, from database to deploy. Production projects for the public and private sectors.",
+    "ogLocale": "en_US"
+  },
+  "skip": "Skip to content",
+  "nav": {
+    "primary": "Main",
+    "home": "Miguel Barra, home",
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact",
+    "connect": "Get in touch",
+    "toggleTheme": "Switch theme",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLang": "View site in Spanish"
+  },
+  "hero": {
+    "eyebrow": "Miguel Barra - Santiago, Chile",
+    "h1": { "pre": "I build", "mid": "products that", "post": "reach ", "accent": "production." },
+    "sub": "Full Stack Developer. React, Next.js and TypeScript, from database to deploy.",
+    "cta": "View work",
+    "portraitAlt": "Black and white portrait of Miguel Barra"
+  },
+  "stats": {
+    "label": "At a glance",
+    "items": [
+      { "value": "2+ years", "label": "shipping to production" },
+      { "value": "Public & private", "label": "municipal, health, banking" },
+      { "value": "Graduated 2025", "label": "Computer Engineering, UNAB" }
+    ]
+  },
+  "work": {
+    "heading": "Work",
+    "intro": "Production projects for the public and private sectors: the context, my role, and how it was solved.",
+    "labels": {
+      "context": "Context",
+      "role": "Role",
+      "solution": "Solution",
+      "stack": "Stack",
+      "outcome": "Outcome"
+    },
+    "linkSite": "View site",
+    "linkCode": "Code on GitHub",
+    "featured": {
+      "name": "Pulso",
+      "kicker": "Personal project · In production",
+      "lead": "Near real-time dashboard of Chile's economic indicators.",
+      "shotAlt": "Pulso screenshot: historical chart for one indicator and a grid of economic indicators",
+      "facts": [
+        { "k": "context", "v": "Banco Central de Chile's SI3 API is hard to consume directly from the frontend and has non-trivial quirks.", "em": false, "pending": "" },
+        { "k": "role", "v": "End-to-end design and development, frontend and backend.", "em": true, "pending": "" },
+        { "k": "solution", "v": "A custom intermediate API built with Next.js Route Handlers that wraps the source, with in-memory cache and a fallback for upstream failures. Ten indicators (UF, USD, CPI, IMACEC, MPR and others) with a grid, historical chart, favorites and a converter.", "em": false, "pending": "" },
+        { "k": "outcome", "v": "In production on Vercel, with unit tests in Vitest, end-to-end tests in Playwright and continuous integration on GitHub Actions.", "em": true, "pending": "" }
+      ]
+    },
+    "items": [
+      {
+        "name": "DOM Digital",
+        "kicker": "Forcast · Full Stack Developer",
+        "lead": "SaaS to digitize municipal construction permits.",
+        "shotAlt": "",
+        "facts": [
+          { "k": "context", "v": "The Dirección de Obras Municipales permits ran on a legacy system.", "em": false, "pending": "" },
+          { "k": "role", "v": "Built from scratch, gathering requirements directly with the client.", "em": true, "pending": "" },
+          { "k": "stack", "v": "Next.js, Node.js, PostgreSQL, Firebase Auth, Azure.", "em": false, "pending": "" },
+          { "k": "outcome", "v": "Replaced the legacy system; deployed on Azure. ", "em": false, "pending": "Adoption metrics to be confirmed" }
+        ]
+      },
+      {
+        "name": "E-Hive",
+        "kicker": "Forcast · Solo module",
+        "lead": "EV charging management with license-plate verification.",
+        "shotAlt": "",
+        "facts": [
+          { "k": "context", "v": "The platform needs to verify the license plate before enabling charging.", "em": false, "pending": "" },
+          { "k": "role", "v": "Solo development of the QR-scanning module and its endpoints.", "em": true, "pending": "" },
+          { "k": "stack", "v": "Angular, Python, Flask, Docker (microservices).", "em": false, "pending": "" },
+          { "k": "outcome", "v": "", "em": false, "pending": "Production status to be confirmed" }
+        ]
+      },
+      {
+        "name": "Sucursal Virtual de iSalud",
+        "kicker": "Valuesite · Full Stack Developer",
+        "lead": "Vouchers, reimbursements and certificates platform for a Codelco health insurer (Isapre).",
+        "shotAlt": "",
+        "facts": [
+          { "k": "context", "v": "iSalud's Sucursal Virtual ran on a legacy frontend.", "em": false, "pending": "" },
+          { "k": "role", "v": "Individual modernization, supervised by a senior developer.", "em": true, "pending": "" },
+          { "k": "solution", "v": "Migrated critical frontend features and added new methods in ASP.NET MVC microservices over Oracle (PL/SQL): doctor listings, patient lookup and other clinical flows.", "em": false, "pending": "" },
+          { "k": "outcome", "v": "Platform used by over 18,000 Codelco beneficiaries.", "em": true, "pending": "" }
+        ]
+      },
+      {
+        "name": "App Ewreka",
+        "kicker": "Ewreka · Internship",
+        "lead": "Mobile app for a perks and discounts platform.",
+        "shotAlt": "",
+        "facts": [
+          { "k": "context", "v": "Mobile app in active development for an early-stage product.", "em": false, "pending": "" },
+          { "k": "role", "v": "Feature implementation and requirements gathering directly with the founder.", "em": true, "pending": "" },
+          { "k": "stack", "v": "Flutter.", "em": false, "pending": "" },
+          { "k": "outcome", "v": "", "em": false, "pending": "Scope and status to be confirmed" }
+        ]
+      }
+    ]
+  },
+  "tech": {
+    "heading": "Stack",
+    "intro": "What I use day to day to take a product from idea to deploy.",
+    "columns": [
+      { "title": "Frontend", "items": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Angular", "Shadcn/ui"] },
+      { "title": "Backend", "items": ["Node.js", "NestJS", "ASP.NET MVC (.NET)", "Python / Flask", "REST APIs", "Prisma ORM"] },
+      { "title": "Data & infrastructure", "items": ["PostgreSQL", "Oracle PL/SQL", "Supabase", "Docker", "Azure, GCP, Vercel", "CI/CD, GitHub Actions", "Firebase Auth"] },
+      { "title": "Mobile", "items": ["Flutter", "Ionic (Angular)"] }
+    ],
+    "note": { "prefix": "Also:", "rest": " I work daily with Claude Code CLI and Antigravity." }
+  },
+  "about": {
+    "heading": "About",
+    "intro": "Background, path, and the way I like to work.",
+    "prose": [
+      { "strong": "I'm a Computer Engineer", "rest": ", graduated from Universidad Andrés Bello in 2025." },
+      { "strong": "", "rest": "In just over two years I've shipped production software for the public and private sectors: a municipal management SaaS, the modernization of a Codelco health insurer's online branch, and my own tools for the Chilean market." },
+      { "strong": "", "rest": "I work across the full stack, with a focus on React, Next.js and TypeScript." }
+    ],
+    "groups": {
+      "experience": {
+        "label": "Experience",
+        "items": [
+          { "years": "2025 - 2026", "org": "Forcast", "desc": "Full Stack Developer. Municipal management SaaS (DOM Digital) and an EV charging app (E-Hive)." },
+          { "years": "2024", "org": "Ewreka", "desc": "Internship. Mobile development with Flutter." },
+          { "years": "2022 - 2023", "org": "Valuesite Ltda.", "desc": "Full Stack Developer. Modernizing health platforms for Codelco (iSalud)." }
+        ]
+      },
+      "education": {
+        "label": "Education",
+        "items": [
+          { "years": "2025", "org": "Universidad Andrés Bello", "desc": "Graduated in Computer Engineering." }
+        ]
+      }
+    }
+  },
+  "contact": {
+    "heading": "Let's talk.",
+    "intro": "I'm open to connecting and talking about projects, teams and opportunities.",
+    "links": { "cv": "Download CV (PDF)" }
+  },
+  "footer": {
+    "copyright": "Miguel Barra. Santiago, Chile.",
+    "built": "Built with HTML, CSS and a little JavaScript."
+  },
+  "deck": {
+    "label": "Section navigation",
+    "goTo": {
+      "top": "Go to Home",
+      "work": "Go to Work",
+      "stack": "Go to Stack",
+      "about": "Go to About",
+      "contact": "Go to Contact"
+    },
+    "prev": "Previous section",
+    "next": "Next section"
+  }
+}
